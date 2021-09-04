@@ -1,29 +1,31 @@
-const searchSongs = () =>{
+const searchBooks = () =>{
     const searchText = document.getElementById('search-field').value;
-    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`
+    //const url = `https://www.thebookdb.com/api/json/v1/1/search.php?s=${searchText}`
+    const url = `https://openlibrary.org/search.json?q=${searchText}`
+    
     // loa data
     fetch(url)
     .then(res => res.json())
-    .then(data => displaySongs(data.meals))
+    .then(data => displayBooks(data.books))
 }
 
-const displaySongs = meal => {
-    const mealContainer = document.getElementById('meal-container')
+const displayBooks = book => {
+    const bookContainer = document.getElementById('book-container')
     
-    meal.forEach(meal => {
-        console.log(meal)
-        const mealDiv = document.createElement('div');
-        mealDiv.className = 'single-result row align-item-center my-3 p-3';
-        mealDiv.innerHTML = `
+    book.forEach(book => {
+        console.log(book)
+        const bookDiv = document.createElement('div');
+        bookDiv.className = 'single-result row align-item-center my-3 p-3';
+        bookDiv.innerHTML = `
         <div class="col-md-9">
-            <h3 class="lyrics-name">${meal.strMeal}</h3>
-            <img src="${meal.strMealThumb}" alt="">
+            <h3 class="lyrics-name">${book.strbook}</h3>
+            <img src="${book.strbookThumb}" alt="">
         </div>
         <div class="col-md-3 text-md-right text-center">
-            <button onclick="getIngredient('${meal.strIngredient1}','${meal.strIngredient2}','${meal.strIngredient3}','${meal.strIngredient4}','${meal.strIngredient5}')" class="btn btn-success">Ingredient</button>
+            <button onclick="getIngredient('${book.strIngredient1}','${book.strIngredient2}','${book.strIngredient3}','${book.strIngredient4}','${book.strIngredient5}')" class="btn btn-success">Ingredient</button>
         </div>
         `;
-        mealContainer.appendChild(mealDiv);
+        bookContainer.appendChild(bookDiv);
     })
 }
 const getIngredient = (ingredientName1,ingredientName2,ingredientName3,ingredientName4,ingredientName5) =>{
@@ -34,4 +36,4 @@ const getIngredient = (ingredientName1,ingredientName2,ingredientName3,ingredien
     console.log(ingredientName5);
 }
 
-//meal.strMeal;
+//book.strbook;
